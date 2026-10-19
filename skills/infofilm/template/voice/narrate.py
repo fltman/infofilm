@@ -64,6 +64,10 @@ def main(argv):
     if "--skip" in argv:
         i = argv.index("--skip")
         skip, argv = set(argv[i + 1:]), argv[:i]
+    # a mistyped flag must never be read as a scene list next to real ids: that bills those scenes
+    bad = [a for a in argv + sorted(skip) if a.startswith("-")]
+    if bad:
+        sys.exit(f"unknown flag: {' '.join(bad)} (known: --dry-run, --skip)")
     voice = json.loads((ROOT / "voice/voice.json").read_text())["voice_id"]
     _, scenes = parse()
     todo = []

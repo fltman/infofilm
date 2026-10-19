@@ -11,6 +11,7 @@
 | Beat tracker says 118 BPM for a 166 BPM song | Search range too narrow (octave error) | Keep 70–220, calibrate against a click track |
 | The narrator reads a production note aloud; the note shows up as a caption | The parser treated `<!-- … -->` as narration | The template parser skips every comment; check `script_parse.py --json` |
 | Words glued in the timeline ("majority.Remember"), a cue not found | Text-to-Dialogue joins paragraphs without spaces | `build_timeline.py` forces a word boundary at each paragraph start |
+| `narrate.py --dry-run S25` billed the scene | An older project's `narrate.py` had no `--dry-run`, so the flag was ignored and S25 was narrated | Check `grep -c dry-run voice/narrate.py` before trusting the flag in a project made before the template had it; the template now refuses unknown flags |
 | A scene's audio is silent after an edit | The narration is for the old text | `build_timeline.py` prints "older text"; re-narrate that scene |
 | The image model writes words ("WHOOSH", "1957", "BALLOT") | Models add text | Explicit "no text" in every prompt, plus inspecting every image |
 | The mascot has two hats | Image-to-image doubles props | Inspect; regenerate; re-measure positions laid over the picture |
