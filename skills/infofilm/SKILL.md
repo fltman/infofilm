@@ -106,7 +106,7 @@ Visual fixes cost nothing but a re-render; only new narration, images or downloa
 | `voice/` | `design.json` + `design_voice.py` (voice design), `narrate.py` (narration + timestamps), `listen.py` (listening page), `voice.json` |
 | `music/` | `suno/*.wav`, `cuts.json`, `tools/beats.py` (tempo), `tools/suno_lines.py` (aligned lyrics → lines) |
 | `art/` | `style.json` (the look, the never-list), `shots.json`, `gen.py`, `img/` |
-| `tools/` | `build_timeline.py`, `cues.py`, `lint_cues.py`, `make_srt.py`, `sync_art.py`, `art_sheet.py`, `make_sfx.py`, `render.sh` |
+| `tools/` | `build_timeline.py`, `cues.py`, `lint_cues.py`, `make_srt.py`, `sync_art.py`, `art_sheet.py`, `unframe.py`, `make_sfx.py`, `render.sh` |
 | `video/src/` | `theme.ts`, `fonts.ts`, `timing.tsx` (`useScene`, `cue`), `data.ts`, `lyrics.ts`, `Music.tsx`, `primitives/` (Card, Bits, Film, Jingle, Hemicycle), `scenes/` |
 | `video/tools/` | `stills.mjs` (contact sheet of chosen frames), `review.mjs` (N frames per scene, many scenes) |
 

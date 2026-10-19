@@ -27,3 +27,4 @@
 | Two renders at once, both crawling or crashing | RAM and Chrome instances | One render at a time; builders render stills only |
 | Scene images come out as a worn paper sheet with edges or a frame | The style reference is a model sheet on aged paper, and `style_only` asked to match its "aged paper" | `style_only` takes only the drawing style ("not its paper sheet, worn edges or layout"); `kinds.film` forbids paper sheets, worn edges and rounded corners |
 | A real building comes out as a generic one | The model draws its own idea of the place | Attach photographs with `photos` (see images.md, "Real places") |
+| A scene image has a drawn frame, a cream margin or rounded paper corners despite the prompt (aerial and map-like views most often) | The model frames "a view" like a picture; regenerating often frames it again | `python3 tools/unframe.py film-Sxx` crops it off and keeps the aspect; check that it does not cut into the subject |
