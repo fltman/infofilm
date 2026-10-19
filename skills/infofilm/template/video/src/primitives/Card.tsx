@@ -89,8 +89,9 @@ export const Card: React.FC<{
           }}
         >
           {titleNode ?? (
-            // Bowlby One SC caps run ~0.74 em per character; long titles shrink so the kicker keeps one line
-            <div style={{ fontFamily: DISPLAY, fontSize: Math.min(78, Math.floor(1120 / ((title ?? "").length * 0.74))), color: C.ink, lineHeight: 1, whiteSpace: "nowrap" }}>
+            // Bowlby One SC caps run ~0.74 em per character; long titles shrink so the kicker keeps one line.
+            // The room left for the title is what the kicker leaves (Jost 26 px caps + 0.14 em tracking ≈ 18.5 px a character).
+            <div style={{ fontFamily: DISPLAY, fontSize: Math.min(78, Math.floor((CARD.w - 112 - (kicker ? kicker.length * 18.5 + 48 : 0)) / ((title ?? "").length * 0.74))), color: C.ink, lineHeight: 1, whiteSpace: "nowrap" }}>
               {title}
             </div>
           )}
