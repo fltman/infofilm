@@ -67,7 +67,7 @@ cd ~/films/eu-law/video && npx remotion studio src/index.ts
 | Item | Volume | Cost |
 |---|---|---|
 | Illustrations | 19–30 scene images at 2K (about $0.14 each), plus retakes and style tests | $3–9 |
-| Narration | 6,500–8,000 characters (eleven_v4) | about 0.5 ElevenLabs credits per character: 6,760 characters cost 3,602 credits |
+| Narration | 6,000–8,000 characters (eleven_v4) | 0.5–0.65 ElevenLabs credits per character: 6,760 characters cost 3,602 credits, 6,364 cost 4,077 |
 | Voice design | 1–2 rounds of 3 takes | a few hundred credits |
 | Music | about 7 cues, 2–4 takes each | Suno credits; WAV downloads may count against a plan quota |
 | Render | 13 minutes at 1080p30 | about 50 minutes on a laptop, about 1.2 GB |

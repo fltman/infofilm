@@ -24,7 +24,7 @@ Before reading 10 minutes, read **two representative scenes**: one dense with nu
 - Model `eleven_v4` with `language_code` from film.json (it stops the model drifting into another accent), the Text-to-Dialogue endpoint **with timestamps**, and one input line per paragraph.
 - The cache is content-addressed per chunk. Changing one paragraph re-bills only that paragraph's chunk; everything else is reused.
 - Always run `--dry-run` first. It prints the new characters to bill, without calling the API.
-- The script prints the credits used (from the subscription endpoint) after a real run. Log it. `eleven_v4` measured about 0.53 credits per character (6,760 characters = 3,602 credits).
+- The script prints the credits used (from the subscription endpoint) after a real run. Log it. `eleven_v4` has measured 0.53–0.64 credits per character (6,760 characters = 3,602 credits in one film, 6,364 = 4,077 in the next), so quote the higher figure when you ask.
 - Measure the real pace afterwards (median words per minute) and set `estWpm` in film.json to it, so that scenes still waiting for narration estimate well. A newsreel narrator on `eleven_v4` measured about 127 words per minute.
 
 ## Delivery tags
