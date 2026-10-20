@@ -30,3 +30,4 @@
 | A real building comes out as a generic one | The model draws its own idea of the place | Attach photographs with `photos` (see images.md, "Real places") |
 | A scene image has a drawn frame, a cream margin or rounded paper corners despite the prompt (aerial and map-like views most often) | The model frames "a view" like a picture; regenerating often frames it again | `python3 tools/unframe.py film-Sxx` crops it off and keeps the aspect; check that it does not cut into the subject |
 | A long card title runs into the kicker (Swedish part names are long) | The title shrank against a fixed budget, ignoring the kicker | Fixed in `Card.tsx`: the title gets the width the kicker leaves. Keep kickers under ~35 characters anyway |
+| A sung line reads "Outro]" or ends in "[" | Suno split a section tag across two aligned words ("vind.\n\n[", "Outro]\n\n\n") | Fixed in `suno_lines.py`: tags are stripped character by character across tokens |

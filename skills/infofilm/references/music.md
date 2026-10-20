@@ -26,6 +26,15 @@ Suno has no public API. Use the **official web UI** in Chrome through the claude
     Object.getOwnPropertyDescriptor(proto, 'value').set.call(el, v); el.dispatchEvent(new Event('input', { bubbles: true })); };
   set([...document.querySelectorAll('input')].find(e => e.placeholder === 'Exclude styles'), 'schlager, polka, …');
   ```
+- **The Songs lyrics field is a Lexical editor** (`.lyrics-editor-content`), not a textarea: the native setter and a synthetic paste do nothing, and `execCommand('insertParagraph')` joins every line. Into the empty editor, insert line by line with a synthetic Enter between lines (verified 2026-10-20):
+  ```js
+  const ed = document.querySelector('.lyrics-editor-content'); ed.focus();
+  const enter = () => ed.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', code: 'Enter', keyCode: 13, which: 13, bubbles: true, cancelable: true }));
+  const lines = LYRICS.split('\n');
+  lines.forEach((l, i) => { if (l) document.execCommand('insertText', false, l); if (i < lines.length - 1) enter(); });
+  ```
+  `selectAll` + `delete` does not clear it. To fix text that is already there, edit Lexical's own state and read it back: `const js = ed.__lexicalEditor.getEditorState().toJSON()`, change `js.root.children[i].children[0].text`, then `editor.setEditorState(editor.parseEditorState(JSON.stringify(js)))`.
+- **Spoken lines in a song:** write `[Spoken Word]` on its own line, not "(spoken)"; Suno sings parentheses as backing vocals.
 - **Clip ids** are in the list's links: `[...document.querySelectorAll('a[href*="/song/"]')]`. Fetch metadata (title, duration, Suno's own description of the delivery in `metadata.tags`) from `https://studio-api.prod.suno.com/api/clip/<id>`, with the bearer token described below.
 
 ## Choosing takes when the user has handed you the choice
@@ -38,9 +47,10 @@ Like the chosen takes in Suno, write the ids in `notes/log.md`, and tell the use
 
 ## Downloading (WAV)
 1. On the take: open the **⋯ menu → Download**, choose WAV, untick M4A, then press "Unlock & Download".
-2. **Do not navigate away until the file has arrived** in ~/Downloads (about 10 s). Leaving early silently aborts the download.
-3. Suno's CDN links return 403 to scripts, and the streaming m4a can be truncated. The UI download is the reliable path.
-4. WAV downloads may count against a plan quota. Download only the keepers, and ask first.
+2. If Chrome is set to ask where to save each file, a native **Save dialog** opens, and Claude cannot click it (Chrome is read-only for computer use). Ask the user to choose ~/Downloads and press Save, and watch ~/Downloads for the file. A hidden `.com.google.Chrome.*` file that stops growing means the dialog is waiting.
+3. **Do not navigate away until the file has arrived** in ~/Downloads (about 10 s). Leaving early silently aborts the download.
+4. Suno's CDN links return 403 to scripts, and the streaming m4a can be truncated. The UI download is the reliable path.
+5. WAV downloads may count against a plan quota. Download only the keepers, and ask first.
 
 Move the files to `music/suno/<key>.wav`, and log the take id and title in `notes/log.md`. The dialog shows the remaining downloads and when the quota refreshes; note it in the log.
 

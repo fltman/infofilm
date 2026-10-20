@@ -16,10 +16,22 @@ if isinstance(words, dict):
     words = words.get("aligned_words", [])
 name = sys.argv[2] if len(sys.argv) > 2 else "LINES"
 lines, cur = [], []
+in_tag = skip_ws = False
 for w in words:
     # Suno's tokens carry their own spacing ("Goddag, ", "lektion! (") and a section tag rides on the
-    # next word with its own newline ("[Verse]\nHej ") — drop the tag and that newline, keep the rest
-    text = re.sub(r"\[[^\]]*\]\s*", "", w["word"])
+    # next word with its own newline ("[Verse]\nHej ") — drop the tag and that newline, keep the rest.
+    # A tag can also be split across two tokens ("vind.\n\n[", "Outro]\n\n\n"), so track it char by char.
+    out = []
+    for ch in w["word"]:
+        if in_tag:
+            in_tag = ch != "]"
+            skip_ws = not in_tag
+        elif ch == "[":
+            in_tag = True
+        elif not (skip_ws and ch.isspace()):
+            skip_ws = False
+            out.append(ch)
+    text = "".join(out)
     if text.strip():
         cur.append((text, w["start_s"], w["end_s"]))
     if "\n" in text and cur:

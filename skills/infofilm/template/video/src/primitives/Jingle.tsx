@@ -117,6 +117,9 @@ const outline = (px: number, color: string) =>
 
 const bare = (w: string) => w.toLowerCase().replace(/[^\p{L}\p{N}]/gu, "");
 
+/** The sung lines without their ad-libs ("(ba-da-ba-da)"), for big type; the times stay as Suno gave them. */
+export const withoutAdlibs = (lines: Line[]): Line[] => lines.map((l) => ({ ...l, text: l.text.replace(/\s*\([^)]*\)/g, "").trim() }));
+
 /** The sung line as big kinetic type: each word pops in on its time, the line bounces on the beat.
  * `font` defaults to SCRIPT (Lobster, commercial breaks only); pass DISPLAY for the opening theme or the ballad. */
 export const KineticLyrics: React.FC<{ lines: Line[]; at: number; beat: Beat; hot?: string[]; size?: number; bottom?: number; font?: string }> = ({
