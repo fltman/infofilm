@@ -94,4 +94,4 @@ The tempo and the first-beat phase go into the scene as `{ bpm, phase }` for `be
 | Jingles and ballad | 0.95; the bed fades out around them |
 | Theme under the first words | ducked to about 15 % |
 
-The master is loudness-normalised afterwards. Check the segments: theme, voice over bed, jingle and ballad should all land within about 1 LU of each other.
+The master is loudness-normalised afterwards. Check the segments: theme, voice over bed, jingle and ballad should all land within about 1 LU of each other. When one is off, give its cut a `gain` in dB in `cuts.json` and render again. An a cappella Speech jingle measured 1.2 LU under the speech, and a crooner ballad 1.2 LU over it (Kalmar slott, 2026-10-20). Keep the resulting volume at or under 1.

@@ -105,7 +105,8 @@ def main():
         dst = pub / "music" / (Path(c["file"]).stem + ".mp3")
         copy_audio(src, dst)
         music[key] = {"src": f"music/{dst.name}", "inFrames": round(c.get("in", 0) * FPS),
-                      "outFrames": round(c.get("out", ffdur(src)) * FPS), "fadeFrames": round(c.get("fade", 1.5) * FPS)}
+                      "outFrames": round(c.get("out", ffdur(src)) * FPS), "fadeFrames": round(c.get("fade", 1.5) * FPS),
+                      "gain": round(10 ** (c.get("gain", 0) / 20), 4)}  # gain in dB evens out a quiet or loud take
 
     out, frame, n_real = [], 0, 0
     for s in scenes:

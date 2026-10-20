@@ -28,7 +28,7 @@ export type SceneData = {
   img: string | null; // "img/film-S05.jpg" when that file exists in public/
 };
 
-export type MusicCut = { src: string; inFrames: number; outFrames: number; fadeFrames: number };
+export type MusicCut = { src: string; inFrames: number; outFrames: number; fadeFrames: number; gain?: number }; // gain: linear, from cuts.json dB
 
 export type Timeline = {
   title: string;

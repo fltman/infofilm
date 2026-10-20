@@ -44,7 +44,7 @@ const Cut: React.FC<{ cut: MusicCut; from: number; volume: (f: number) => number
         src={staticFile(cut.src)}
         startFrom={cut.inFrames}
         endAt={cut.outFrames}
-        volume={(f) => volume(f) * clampI(f, [len - cut.fadeFrames, len], [1, 0])}
+        volume={(f) => volume(f) * (cut.gain ?? 1) * clampI(f, [len - cut.fadeFrames, len], [1, 0])}
       />
     </Sequence>
   );

@@ -1,5 +1,5 @@
 {
-  "_doc": "Music cuts, in seconds of the file (Suno aligned lyrics give the times). in/out = the part that plays; fade = fade-out at the end; sungEnd = when the last sung word ends (an intro theme's speech starts 0.4 s after it). A bed has just a file and loops. Keys are used in film.json: parts[…].bed, scenes[…].intro / .after.",
+  "_doc": "Music cuts, in seconds of the file (Suno aligned lyrics give the times). in/out = the part that plays; fade = fade-out at the end; sungEnd = when the last sung word ends (an intro theme's speech starts 0.4 s after it). A bed has just a file and loops. Keys are used in film.json: parts[…].bed, scenes[…].intro / .after. gain = dB on top of the mix level, to even out a take that measures quiet or loud in the master (keep jingle/ballad volume ≤ 1: JINGLE is 0.95, so at most +0.44).",
   "_example_theme":  {"file": "suno/theme.wav",  "in": 0.0, "out": 21.4, "sungEnd": 17.6, "fade": 1.0},
   "_example_bed":    {"file": "suno/bed.wav"},
   "_example_jingle": {"file": "suno/jingle.wav", "in": 0.0, "out": 20.4, "sungEnd": 18.3, "fade": 0.6}
